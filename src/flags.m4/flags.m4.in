@@ -1,0 +1,21 @@
+m4_dnl flags.m4.m4
+m4_dnl All the flags, as M4 macros
+m4_dnl By J. Stuart McMurray
+m4_dnl Created 20251201
+m4_dnl Last Modified 20251205
+m4_dnl
+m4_define(m4_ctr, 1)m4_dnl
+m4_define(m4_flagnum, `m4_ctr()m4_define(`m4_ctr', m4_incr(m4_ctr))')m4_dnl
+m4_define(m4_flag_prefix, ``{FLAG_'m4_flagnum`}_'')m4_dnl
+m4_dnl m4_define(m4_flag_prefix, )m4_dnl
+m4_define(m4_uuid, `m4_esyscmd(m4_uuidgen | tr -d \\n)')m4_dnl
+m4_define(m4_genflag, `m4_ifelse($1,`',`',
+        ``m4_define(m4_flag_$1, 'm4_flag_prefix()`$1_'m4_uuid())`m4_dnl''m4_dnl
+)')m4_dnl
+m4_define(m4_genflags, `m4_ifelse(
+        $#, 1, `m4_genflag($1)',
+        `m4_genflag($1)
+m4_genflags(m4_shift($@))m4_dnl'
+)')m4_dnl
+m4_genflags(m4_translit(m4_include(m4_flaglist),`
+', `,'))m4_dnl

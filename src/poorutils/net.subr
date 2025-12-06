@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# net.subr
+# Network functions
+# By J. Stuart McMurray
+# Created 20251204
+# Last Modified 20251204
+
+# TABDOC: _ipaddrs List local IP addresses
+_ipaddrs() {(
+        LOCAL=no LAST=
+        while read -r; do
+                if [[ "$REPLY" == Local: ]]; then
+                        # We're in the Local: section.
+                        LOCAL=yes
+                        continue
+                elif [[ "$LOCAL" == yes &&
+                        "$REPLY" == */32\ host\ LOCAL* ]]; then
+                        # We've got a local address.
+                        echo "$LAST"
+                fi
+                # Keep hold of the previous line.
+                LAST=$REPLY
+        done </proc/net/fib_trie
+)}

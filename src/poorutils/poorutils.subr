@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# poorutils.subr
+# Coreutils knockoffs, without fork and exec
+# By J. Stuart McMurray
+# Created 20251204
+# Last Modified 20251204
+
+# TABDOC: _cat Print the contents of a file.
+_cat() {
+        echo -E "$(<"${1-}")"
+}
+
+# TABDOC: _cat0 Print the contents of a file with NULs as newlines.
+_cat0() {
+        while read -r -d '' -t 5; do
+                echo -E "$REPLY"
+        done <"${1-}"
+}
+
+# TABDOC: _ps Process listing with _cat0
+_ps() {
+        for i in /proc/*/cmdline; do
+                echo "--- $i ---"
+                _cat0 "$i"
+        done
+}
