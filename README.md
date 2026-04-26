@@ -1,8 +1,8 @@
 A Hacker's Journey Through `/proc`
 ==================================
-Material for a [talk](https://docs.google.com/presentation/d/1btvHtZYNFm0jaAggYvZQCLqLE0CXspBj1cswqZbcivc/edit?slide=id.g39a29d6818d_1_126#slide=id.g39a29d6818d_1_126)
-
-Presented at BSides Dresden 2025.
+Material for a talk about `/proc` and hacking, presented at
+- [BSides Dresden 2025](https://docs.google.com/presentation/d/1btvHtZYNFm0jaAggYvZQCLqLE0CXspBj1cswqZbcivc/edit?slide=id.g39a29d6818d_1_126#slide=id.g39a29d6818d_1_126)
+- [Bsides Dublin 2026 (soon...)](https://docs.google.com/presentation/d/1qZBLvkyrqeW0EoTDVASi9uzWJ1kFq_Gtpdi1nL1KGTA/edit?slide=id.g3d5808b68a4_1_49#slide=id.g3d5808b68a4_1_49)
 
 Helpful things:
 - The [`src/`](./src) directory - Source code for most of the things in the talk
@@ -18,9 +18,7 @@ The talk more or less walks through a CTF, which may be set up using either
 [`compose.json`](./compose.json) or [`user-data.sh`](./user-data.sh).
 
 Something like solutions can be found in the [`pastables`](./pastables) used to
-make the
-[slides](https://docs.google.com/presentation/d/1btvHtZYNFm0jaAggYvZQCLqLE0CXspBj1cswqZbcivc/edit?slide=id.g39a29d6818d_1_126#slide=id.g39a29d6818d_1_126)
-for the talk.
+make the for the talk.
 
 The curl one-liner should look like
 ```sh
