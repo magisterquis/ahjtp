@@ -2,7 +2,7 @@ A Hacker's Journey Through `/proc`
 ==================================
 Material for a talk about `/proc` and hacking, presented at
 - [BSides Dresden 2025](https://docs.google.com/presentation/d/1btvHtZYNFm0jaAggYvZQCLqLE0CXspBj1cswqZbcivc/edit?slide=id.g39a29d6818d_1_126#slide=id.g39a29d6818d_1_126)
-- [Bsides Dublin 2026 (soon...)](https://docs.google.com/presentation/d/1qZBLvkyrqeW0EoTDVASi9uzWJ1kFq_Gtpdi1nL1KGTA/edit?slide=id.g3d5808b68a4_1_49#slide=id.g3d5808b68a4_1_49)
+- [Bsides Dublin 2026](https://docs.google.com/presentation/d/1qZBLvkyrqeW0EoTDVASi9uzWJ1kFq_Gtpdi1nL1KGTA/edit?slide=id.g3d5808b68a4_1_49#slide=id.g3d5808b68a4_1_49)
 
 Helpful things:
 - The [`src/`](./src) directory - Source code for most of the things in the talk
